@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1615431028",
+    "project_id": "bypresscmu",
+    "storage_bucket": "bypresscmu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1615431028:android:8de863c585ce643d231821",
+        "android_client_info": {
+          "package_name": "com.example.by_press_cmu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1615431028-1q24st4pjdjotim9e7pb755e2pvgsidn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.by_press_cmu",
+            "certificate_hash": "73ff338f1e1b2af10d5da6ef408689115b6fa2ad"
+          }
+        },
+        {
+          "client_id": "1615431028-qjovh3hjsdg7eoh7iin7bmosalnqth50.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRgzBxU4duqBhsYSbg_ap7emfmIKaojCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1615431028-qjovh3hjsdg7eoh7iin7bmosalnqth50.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
