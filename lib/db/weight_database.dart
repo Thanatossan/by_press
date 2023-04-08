@@ -24,9 +24,12 @@ class WeightDatabase {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
 
-    return await openDatabase(path, version: 1, onCreate: _createDB);
+    return await openDatabase(path,version: 2,onUpgrade: _onUpgrade ,onCreate: _createDB);
+
+
   }
   final weightTest = 'weightTest';
+
   Future _createDB(Database db, int version) async {
     final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     final textType = 'TEXT NOT NULL';
@@ -67,6 +70,47 @@ CREATE TABLE $tableWeightTest (
     return weightTest.copy(id:id);
   }
 
+  Future _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < newVersion) {
+      // you can execute drop table and create table
+      await db.execute('''DROP TABLE $tableUser''');
+      await db.execute('''DROP TABLE $tableWeightTest''');
+      final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
+      final textType = 'TEXT NOT NULL';
+      final boolType = 'BOOLEAN NOT NULL';
+      final integerType = 'INTEGER NOT NULL';
+      final floatType = 'DOUBLE NOT NULL';
+
+            await db.execute('''
+      CREATE TABLE $tableUser ( 
+        ${UserFields.id} $idType, 
+        ${UserFields.name} $textType,
+        ${UserFields.surname} $textType,
+        ${UserFields.gender} $textType,
+        ${UserFields.age} $integerType,
+        ${UserFields.weight} $floatType,
+        ${UserFields.bmi} $floatType,
+        ${UserFields.surgery} $textType,
+        ${UserFields.createAt} $textType
+        )
+      ''');
+
+      await db.execute('''
+CREATE TABLE $tableWeightTest ( 
+  ${WeightTestFields.id} $idType, 
+  ${WeightTestFields.userId} $integerType,
+  ${WeightTestFields.time} $textType,
+  ${WeightTestFields.first} $floatType,
+  ${WeightTestFields.second} $floatType,
+  ${WeightTestFields.third} $floatType,
+  FOREIGN KEY (${WeightTestFields.userId}) REFERENCES tableUser(${UserFields.id})
+  )
+''');
+
+    }
+
+
+  }
   // Future<WeightTest> getMaxTest(int userId) async {
   //   final db = await instance.database;
   //   final result = await db.rawQuery(
